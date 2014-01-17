@@ -1,0 +1,43 @@
+{
+  "name": "gulp-gitshasuffix",
+  "version": "0.0.0-1",
+  "description": "A plugin for Gulp to suffix files with latest commit sha.",
+  "keywords": [
+    "gulpplugin",
+    "git",
+    "git sha"
+  ],
+  "homepage": "https://github.com/mikaelbr/gulp-gitshasuffix",
+  "bugs": "https://github.com/mikaelbr/gulp-gitshasuffix/issues",
+  "author": {
+    "name": "Mikael Brevik",
+    "email": "mikaelbre@gmail.com",
+    "url": "https://github.com/mikaelbr"
+  },
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikaelbr/gulp-gitshasuffix.git"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "dependencies": {
+    "through2": "*",
+    "gulp-util": "~2.2.12"
+  },
+  "devDependencies": {
+    "gulp": "~3.3.4",
+    "mocha": "*",
+    "should": "~2.1.0"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ]
+}
