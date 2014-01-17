@@ -1,14 +1,16 @@
 var through = require("through2"),
   find = require("lodash.find"),
   gutil = require("gulp-util"),
+  path = require("path"),
   git = require("./lib/git");
 
-module.exports = function (length) {
+module.exports = function (length, seperator) {
   "use strict";
 
   var sha = null;
 
   length = length || 6;
+  seperator = seperator || "-";
 
   var gitshasuffix = function (file, enc, callback) {
     // helper variables
@@ -28,7 +30,7 @@ module.exports = function (length) {
     }
 
     var appendSuffix = function () {
-      file.path = path.join(dir, path.basename(file.path, firstname) + suffix + ext);
+      file.path = path.join(dir, path.basename(file.path, firstname) + seperator + sha.substring(0, length) + ext);
       stream.push(file);
       return callback();
     };

@@ -8,12 +8,9 @@ var should = require("should"),
 
 require("mocha");
 
-var filePath = join(__dirname, "./fixtures/*.txt"),
-    expectedFile = join(__dirname, "./fixtures/a.txt");
-
 var gutil = require("gulp-util"),
   gulp = require("gulp"),
-  gitmodified = require("../");
+  suffix = require("../");
 
 describe("gulp-gitmodified", function () {
 
