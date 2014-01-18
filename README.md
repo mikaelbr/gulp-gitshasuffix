@@ -5,7 +5,9 @@
 
 ## Usage
 
-A plugin for Gulp to suffix files with latest commit sha.
+A plugin for Gulp to suffix files with latest commit sha. 
+
+E.g. Use instead of having timestamps on compiled files to avoid caching (versioning).
 
 First, install `gulp-gitshasuffix` as a development dependency:
 
@@ -21,7 +23,7 @@ var gitshasuffix = require("gulp-gitshasuffix");
 var files = gulp.src("./src/*.ext")
 	.pipe(gitshasuffix(6, "-"))
 
-files.on('data', function (file) {
+files.on('data', function (file){
   console.log("Modified file:", file);
 });
 ```
@@ -40,7 +42,33 @@ Length of the sha to show.
 Type: `String`  
 Default: "-"
 
-Seperator before the suffix
+Seperator before the suffix.
+
+
+## Examples
+
+To see all examples run from root:
+
+```sh
+$ gulp --gulpfile examples/gulpfile.js --tasks
+[gulp] Using file /Users/example/gulp-gitshasuffix/examples/gulpfile.js
+[gulp] Working directory changed to /Users/example/gulp-gitshasuffix/examples
+[gulp] Tasks for /Users/example/gulp-gitshasuffix/examples/gulpfile.js
+[gulp] └── default
+```
+
+Run example:
+
+```sh
+$ gulp --gulpfile examples/gulpfile.js
+[gulp] Using file /Users/example/gulp-gitshasuffix/examples/gulpfile.js
+[gulp] Working directory changed to /Users/example/gulp-gitshasuffix/examples
+[gulp] Running 'default'...
+[gulp] Finished 'default' in 4.43 ms
+New path:  /Users/example/gulp-gitshasuffix/test/fixtures/a-eaa51c.txt
+New path:  /Users/example/gulp-gitshasuffix/test/fixtures/b-eaa51c.txt
+New path:  /Users/example/gulp-gitshasuffix/test/fixtures/c-eaa51c.txt
+```
 
 ## License
 
