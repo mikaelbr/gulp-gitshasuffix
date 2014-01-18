@@ -3,17 +3,13 @@ var gulp = require("gulp"),
     suffix = require("../");
 
 gulp.task("foo", function () {
-  var data = gulp.src(["../index.js"])
-    .pipe(through.obj(function (file, enc, cb) {
-      this.push(file);
-      return cb();
-    }))
+  var data = gulp.src(["../test/**", "../*.js"])
     .pipe(suffix())
     .on('error', function (err) {
       console.log(err);
     })
     .pipe(through.obj(function (file, enc, cb) {
-      console.log("Modified: ", file.relative);
+      console.log("Modified: ", file.path);
       this.push(file);
       return cb()
     }));

@@ -24,7 +24,8 @@
   },
   "dependencies": {
     "through2": "*",
-    "gulp-util": "~2.2.12"
+    "gulp-util": "~2.2.12",
+    "which": "~1.0.5"
   },
   "devDependencies": {
     "gulp": "~3.3.4",

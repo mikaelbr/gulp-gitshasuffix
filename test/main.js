@@ -15,7 +15,7 @@ var gutil = require("gulp-util"),
 describe("gulp-gitmodified", function () {
 
   it("should return a stream", function (done) {
-    var stream = gitmodified();
+    var stream = suffix();
     should.exist(stream.on);
     should.exist(stream.write);
     done();

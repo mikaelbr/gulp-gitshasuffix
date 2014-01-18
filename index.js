@@ -1,5 +1,4 @@
 var through = require("through2"),
-  find = require("lodash.find"),
   gutil = require("gulp-util"),
   path = require("path"),
   git = require("./lib/git");
@@ -13,24 +12,28 @@ module.exports = function (length, seperator) {
   seperator = seperator || "-";
 
   var gitshasuffix = function (file, enc, callback) {
-    // helper variables
-    var relativePath = path.relative(file.cwd, file.path),
-            dir = path.dirname(relativePath),
-            firstname = file.path.substr(file.path.indexOf(".", 1)),
-            ext = file.path.substr(file.path.lastIndexOf(".")),
-            finalName = "";
-    var stream = this;
+    var stream = this,
+        dir = path.dirname(file.path),
+        ext = path.extname(file.relative),
+        firstname = path.basename(file.relative, ext),
+        finalname = null;
 
-    if (file.isNull()) {
-      return callback();
-    }
     if (file.isStream()) {
       this.emit('error', new gutil.PluginError('gulp-gitshasuffix', 'Stream content is not supported'));
       return callback();
     }
 
     var appendSuffix = function () {
-      file.path = path.join(dir, path.basename(file.path, firstname) + seperator + sha.substring(0, length) + ext);
+      var shaSuffix = sha.substring(0, length),
+          finalSuffix = seperator + shaSuffix;
+
+      if (file.isNull()) {
+        file.path = file.path + finalSuffix;
+        stream.push(file);
+        return callback();
+      }
+
+      file.path = path.join(dir, firstname + finalSuffix + ext);
       stream.push(file);
       return callback();
     };
