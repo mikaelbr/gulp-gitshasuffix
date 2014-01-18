@@ -9,6 +9,9 @@ A plugin for Gulp to suffix files with latest commit sha.
 
 E.g. Use instead of having timestamps on compiled files to avoid caching (versioning).
 
+Whereas [gulp-rev](https://github.com/sindresorhus/gulp-rev) sets a hash based on content,
+this uses the sha hash from the latest git commit.
+
 First, install `gulp-gitshasuffix` as a development dependency:
 
 ```shell
