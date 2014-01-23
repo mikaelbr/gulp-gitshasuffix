@@ -18,11 +18,6 @@ module.exports = function (length, seperator) {
         firstname = path.basename(file.relative, ext),
         finalname = null;
 
-    if (file.isStream()) {
-      this.emit('error', new gutil.PluginError('gulp-gitshasuffix', 'Stream content is not supported'));
-      return callback();
-    }
-
     var appendSuffix = function () {
       var shaSuffix = sha.substring(0, length),
           finalSuffix = seperator + shaSuffix;

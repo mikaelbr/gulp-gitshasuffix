@@ -4,6 +4,7 @@
 var should = require("should"),
   through = require("through2"),
   path = require("path"),
+  fs = require("fs"),
   join = path.join,
   git = require("../lib/git");
 
@@ -141,5 +142,31 @@ describe("gulp-gitmodified", function () {
     });
 
     instream.pipe(outstream);
+  });
+
+  it('should handle streamed files', function (done) {
+    var expectedFile = new gutil.File({
+      path: "test/fixtures/a.txt",
+      cwd: "test/",
+      base: "test/fixtures/",
+      contents: fs.createReadStream(join(__dirname, "/fixtures/a.txt"))
+    });
+    var testSha = "aaabbbcccddd0123456",
+        outstream = suffix();
+
+    git.getLatestSha = function (cb) {
+      return cb(null, testSha);
+    };
+
+    outstream.on('data', function(file) {
+      should.exist(file);
+      should.exist(file.path);
+      should.exist(file.isStream());
+      should(file.isNull()).not.equal(true);
+      file.contents.should.equal(expectedFile.contents);
+      should.exist(file.relative.indexOf("aaabb") !== -1);
+      done();
+    });
+    outstream.write(expectedFile);
   });
 });
