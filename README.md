@@ -33,15 +33,15 @@ files.on('data', function (file){
 
 ## API
 
-### gitshasuffix(length, seperator)
+### gitshasuffix(options)
 
-#### length
+#### options.length
 Type: `Integer`  
 Default: 6
 
 Length of the sha to show.
 
-#### seperator
+#### options.seperator
 Type: `String`  
 Default: "-"
 
@@ -72,6 +72,14 @@ New path:  /Users/example/gulp-gitshasuffix/test/fixtures/a-eaa51c.txt
 New path:  /Users/example/gulp-gitshasuffix/test/fixtures/b-eaa51c.txt
 New path:  /Users/example/gulp-gitshasuffix/test/fixtures/c-eaa51c.txt
 ```
+
+## Changelog
+
+0.1.0:
+ * Changes to using options object instead of two parameters on input.
+
+0.0.4: 
+ * No longer throws unjust error on streamed contents.
 
 ## License
 

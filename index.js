@@ -3,13 +3,14 @@ var through = require("through2"),
   path = require("path"),
   git = require("./lib/git");
 
-module.exports = function (length, seperator) {
+module.exports = function (options) {
   "use strict";
 
   var sha = null;
 
-  length = length || 6;
-  seperator = seperator || "-";
+  options = options || {};
+  var length = options.length || 6;
+  var seperator = options.seperator || "-";
 
   var gitshasuffix = function (file, enc, callback) {
     var stream = this,

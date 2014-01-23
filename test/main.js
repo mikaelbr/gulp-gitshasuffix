@@ -69,7 +69,7 @@ describe("gulp-gitmodified", function () {
     var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
         length = 8,
         instream = gulp.src(join(__dirname, "./fixtures")),
-        outstream = suffix(length);
+        outstream = suffix({length: length});
 
     git.getLatestSha = function (cb) {
       return cb(null, testSha);
@@ -94,7 +94,10 @@ describe("gulp-gitmodified", function () {
     var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
         seperator = "***",
         instream = gulp.src(join(__dirname, "./fixtures")),
-        outstream = suffix(6, seperator);
+        outstream = suffix({
+          length: 6,
+          seperator: seperator
+        });
 
     git.getLatestSha = function (cb) {
       return cb(null, testSha);
@@ -119,7 +122,10 @@ describe("gulp-gitmodified", function () {
     var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
         seperator = "***",
         instream = gulp.src(join(__dirname, "./fixtures/*")),
-        outstream = suffix(6, seperator);
+        outstream = suffix({
+          length: 6,
+          seperator: seperator
+        });
 
     git.getLatestSha = function (cb) {
       return cb(null, testSha);
