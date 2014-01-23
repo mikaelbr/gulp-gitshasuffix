@@ -1,6 +1,6 @@
 {
   "name": "gulp-gitshasuffix",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A plugin for Gulp to suffix files with latest commit sha.",
   "keywords": [
     "gulpplugin",
