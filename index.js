@@ -11,6 +11,7 @@ module.exports = function (options) {
   options = options || {};
   var length = options.length || 6;
   var seperator = options.seperator || "-";
+  var folder = !!options.folder;
 
   var gitshasuffix = function (file, enc, callback) {
     var stream = this,
@@ -27,6 +28,11 @@ module.exports = function (options) {
         file.path = file.path + finalSuffix;
         stream.push(file);
         return callback();
+      }
+
+      if (folder) {
+        dir = path.join(dir, shaSuffix);
+        finalSuffix = '';
       }
 
       file.path = path.join(dir, firstname + finalSuffix + ext);

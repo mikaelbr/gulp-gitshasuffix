@@ -66,6 +66,27 @@ describe("gulp-gitmodified", function () {
     instream.pipe(outstream);
   });
 
+  it('should be able to prefix with folder', function(done) {
+    var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
+        instream = gulp.src(join(__dirname, "./fixtures/a.txt")),
+        outstream = suffix({
+          folder: true
+        });
+
+    git.getLatestSha = function (cb) {
+      return cb(null, testSha);
+    };
+
+    outstream.on('data', function(file) {
+      should.exist(file);
+      should.exist(file.path);
+      file.path.should.contain("/" + testSha.substring(0, 6) + "/");
+      done();
+    });
+
+    instream.pipe(outstream);
+  });
+
   it('should take suffix length as argument', function(done) {
     var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
         length = 8,
