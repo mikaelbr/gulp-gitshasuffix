@@ -35,6 +35,7 @@ describe("gulp-gitmodified", function () {
     outstream.on('data', function(file) {
       should.exist(file);
       should.exist(file.path);
+      file.path.should.contain("-aaabb")
       should.exist(file.relative.indexOf("aaabb") !== -1);
       done();
     });
@@ -44,7 +45,7 @@ describe("gulp-gitmodified", function () {
 
   it('should default to - as seperator and the first 6 characters', function(done) {
     var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
-        instream = gulp.src(join(__dirname, "./fixtures")),
+        instream = gulp.src(join(__dirname, "./fixtures/a.txt")),
         outstream = suffix();
 
     git.getLatestSha = function (cb) {
@@ -58,7 +59,7 @@ describe("gulp-gitmodified", function () {
       should.exist(split);
       should.exist(split[1]);
       split.length.should.equal(2);
-      split[1].should.equal(testSha.substring(0, 6));
+      split[1].should.equal(testSha.substring(0, 6) + ".txt");
       done();
     });
 
@@ -68,7 +69,7 @@ describe("gulp-gitmodified", function () {
   it('should take suffix length as argument', function(done) {
     var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
         length = 8,
-        instream = gulp.src(join(__dirname, "./fixtures")),
+        instream = gulp.src(join(__dirname, "./fixtures/a.txt")),
         outstream = suffix({length: length});
 
     git.getLatestSha = function (cb) {
@@ -82,8 +83,8 @@ describe("gulp-gitmodified", function () {
       should.exist(split);
       should.exist(split[1]);
       split.length.should.equal(2);
-      split[1].length.should.equal(length);
-      split[1].should.equal(testSha.substring(0, length));
+      split[1].split(".")[0].length.should.equal(length);
+      split[1].should.equal(testSha.substring(0, length) + ".txt");
       done();
     });
 
@@ -93,7 +94,7 @@ describe("gulp-gitmodified", function () {
   it('should take seperator as argument', function(done) {
     var testSha = "fbb790d601f7cb0ad0fabe5feff023b02aa9a03d",
         seperator = "***",
-        instream = gulp.src(join(__dirname, "./fixtures")),
+        instream = gulp.src(join(__dirname, "./fixtures/a.txt")),
         outstream = suffix({
           length: 6,
           seperator: seperator
@@ -111,7 +112,7 @@ describe("gulp-gitmodified", function () {
       should.exist(split);
       should.exist(split[1]);
       split.length.should.equal(2);
-      split[1].should.equal(testSha.substring(0, 6));
+      split[1].should.equal(testSha.substring(0, 6) + ".txt");
       done();
     });
 
