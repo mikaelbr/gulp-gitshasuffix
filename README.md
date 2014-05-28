@@ -24,10 +24,25 @@ Then, add it to your `gulpfile.js`:
 var gitshasuffix = require("gulp-gitshasuffix");
 
 var files = gulp.src("./src/*.ext")
-	.pipe(gitshasuffix(6, "-"))
+	.pipe(gitshasuffix({
+    length: 6,
+    seperator: "-"
+  }))
 
 files.on('data', function (file){
   console.log("Modified file:", file);
+});
+```
+
+Full usage example:
+
+```javascript
+var gitshasuffix = require("gulp-gitshasuffix");
+
+gulp.task('moveFiles'. function () {
+  gulp.src("./src/*.ext")
+     .pipe(gitshasuffix())
+     .pipe(gulp.dest('./'));
 });
 ```
 
@@ -47,6 +62,17 @@ Default: "-"
 
 Seperator before the suffix.
 
+#### options.folder
+Type: `Boolean`  
+Default: "false"
+
+If the sha-substring should be as a folder instead of suffix.
+E.g.
+
+```
+New path:  /Code/gulp-gitshasuffix/test/fixtures/c03b75/a.txt
+```
+
 
 ## Examples
 
@@ -57,7 +83,9 @@ $ gulp --gulpfile examples/gulpfile.js --tasks
 [gulp] Using file /Users/example/gulp-gitshasuffix/examples/gulpfile.js
 [gulp] Working directory changed to /Users/example/gulp-gitshasuffix/examples
 [gulp] Tasks for /Users/example/gulp-gitshasuffix/examples/gulpfile.js
-[gulp] └── default
+[gulp] ├── default
+[gulp] ├── folder
+[gulp] └── folderPrefix
 ```
 
 Run example:
@@ -74,6 +102,9 @@ New path:  /Users/example/gulp-gitshasuffix/test/fixtures/c-eaa51c.txt
 ```
 
 ## Changelog
+
+0.2.0:
+ * Adds possibility to have sha as subfolder instead of suffix
 
 0.1.0:
  * Changes to using options object instead of two parameters on input.
