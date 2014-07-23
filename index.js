@@ -10,7 +10,7 @@ module.exports = function (options) {
 
   options = options || {};
   var length = options.length || 6;
-  var seperator = options.seperator || "-";
+  var separator = options.separator || options.seperator || "-";
   var folder = !!options.folder;
 
   var gitshasuffix = function (file, enc, callback) {
@@ -22,7 +22,7 @@ module.exports = function (options) {
 
     var appendSuffix = function () {
       var shaSuffix = sha.substring(0, length),
-          finalSuffix = seperator + shaSuffix;
+          finalSuffix = separator + shaSuffix;
 
       if (file.isNull()) {
         file.path = file.path + finalSuffix;
