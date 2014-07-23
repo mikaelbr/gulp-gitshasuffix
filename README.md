@@ -26,7 +26,7 @@ var gitshasuffix = require("gulp-gitshasuffix");
 var files = gulp.src("./src/*.ext")
 	.pipe(gitshasuffix({
     length: 6,
-    seperator: "-"
+    separator: "-"
   }))
 
 files.on('data', function (file){
@@ -56,11 +56,11 @@ Default: 6
 
 Length of the sha to show.
 
-#### options.seperator
+#### options.separator
 Type: `String`  
 Default: "-"
 
-Seperator before the suffix.
+Separator before the suffix.
 
 #### options.folder
 Type: `Boolean`  
