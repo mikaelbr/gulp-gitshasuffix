@@ -226,4 +226,35 @@ describe("gulp-gitmodified", function () {
     });
     outstream.write(expectedFile);
   });
+
+  it('should remember old base and path', function (done) {
+    var origPath = "test/fixtures/a.txt";
+    var origBase = "test/fixtures/";
+
+    var expectedFile = new gutil.File({
+      path: origPath,
+      cwd: "test/",
+      base: origBase,
+      contents: fs.createReadStream(join(__dirname, "/fixtures/a.txt"))
+    });
+    var testSha = "aaabbbcccddd0123456",
+        outstream = suffix();
+
+    git.getLatestSha = function (cb) {
+      return cb(null, testSha);
+    };
+
+    outstream.on('data', function(file) {
+      should.exist(file);
+      should.exist(file.path);
+      should.exist(file.isStream());
+      should(file.isNull()).not.equal(true);
+      file.contents.should.equal(expectedFile.contents);
+      should.exist(file.relative.indexOf("aaabb") !== -1);
+      file.revOrigPath.should.equal(origPath);
+      file.revOrigBase.should.equal(origBase);
+      done();
+    });
+    outstream.write(expectedFile);
+  });
 });

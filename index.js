@@ -35,6 +35,8 @@ module.exports = function (options) {
         finalSuffix = '';
       }
 
+      file.revOrigPath = file.path;
+      file.revOrigBase = file.base;
       file.path = path.join(dir, firstname + finalSuffix + ext);
       stream.push(file);
       return callback();
