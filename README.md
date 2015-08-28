@@ -5,7 +5,7 @@
 
 ## Usage
 
-A plugin for Gulp to suffix files with latest commit sha. 
+A plugin for Gulp to suffix files with latest commit sha. As of `v1.0.0`, this plugin works with [`gulp-rev-replace`](https://github.com/jamesknelson/gulp-rev-replace).
 
 E.g. Use instead of having timestamps on compiled files to avoid caching (versioning).
 
