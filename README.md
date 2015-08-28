@@ -102,6 +102,8 @@ New path:  /Users/example/gulp-gitshasuffix/test/fixtures/c-eaa51c.txt
 ```
 
 ## Changelog
+1.0.0:
+ * Adds support for [`gulp-rev-replace`](https://github.com/jamesknelson/gulp-rev-replace)
 
 0.2.0:
  * Adds possibility to have sha as subfolder instead of suffix
